@@ -33,3 +33,9 @@ docker run \
   aquasec/tracee:0.7.0
 
 ```
+
+## More ELFs
+
+```
+curl -o /tmp/elf-fileless https://raw.githubusercontent.com/DenizBasgoren/elf32-hello-world/master/a.out && ./memrun nginx /tmp/elf-fileless
+```
