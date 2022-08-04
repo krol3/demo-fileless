@@ -30,6 +30,13 @@ docker exec -t demo01 /memrun nginx /bin/date
 ```
 docker run -it --rm krol/demo-memrun /memrun nginx /bin/date
 ```
+Run in Kubernetes
+
+```
+kubectl run nginx-fileless --image=krol/demo-memrun 
+
+```
+
 ## Runtime Security
 ### [Tracee](https://github.com/aquasecurity/tracee)
 ```
