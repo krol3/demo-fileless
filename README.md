@@ -1,5 +1,15 @@
 # Fileless demo
 
+## Demo using Tracee and Postee
+
+Receive a notification if you find suspicious behaviour in your cluster, at the runtime stage.
+
+![gif-demo](./img/tracee-postee-slack.gif)
+
+Install Tracee and Postee in Kubernetes [here](https://aquasecurity.github.io/tracee/v0.8.0/installing/kubernetes/)
+
+---
+
 ## Image Scanning
 
 ```
