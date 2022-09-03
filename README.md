@@ -28,10 +28,12 @@ strace -c docker run hello-world
 
 ## Run the container
 
+### Using docker
+
 ```
 docker run --name demo01 krol/demo-memrun
 ```
-Called the fileless program
+Calling the fileless program
 
 ```
 docker exec -t demo01 /memrun nginx /bin/date
@@ -40,11 +42,17 @@ docker exec -t demo01 /memrun nginx /bin/date
 ```
 docker run -it --rm krol/demo-memrun /memrun nginx /bin/date
 ```
-Run in Kubernetes
+### Using Kubernetes
 
 ```
 kubectl run nginx-fileless --image=krol/demo-memrun 
 
+```
+
+Calling the fileless program `kubectl exec -ti nginx-fileless -- /memrun nginx /bin/date`
+```
+kubectl exec -ti nginx-fileless -- /memrun nginx /bin/date
+Sat Sep  3 16:15:26 UTC 2022
 ```
 
 ## Runtime Security
