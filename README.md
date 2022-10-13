@@ -31,17 +31,57 @@ strace -c docker run hello-world
 ### Using docker
 
 ```
-docker run --name demo01 krol/demo-memrun
+docker run --name demo01 krol/demo-memfd:v1
 ```
-Calling the fileless program
+
+<details>
+<summary>Show results</summary>
+
+```
+docker run --name demo01 krol/demo-memfd:v1
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2022/10/13 00:25:19 [notice] 1#1: using the "epoll" event method
+2022/10/13 00:25:19 [notice] 1#1: nginx/1.21.6
+2022/10/13 00:25:19 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
+2022/10/13 00:25:19 [notice] 1#1: OS: Linux 5.15.0-1020-aws
+2022/10/13 00:25:19 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2022/10/13 00:25:19 [notice] 1#1: start worker processes
+2022/10/13 00:25:19 [notice] 1#1: start worker process 31
+````
+</details></br>
+
+
+Executing the program in a memory file descriptor
 
 ```
 docker exec -t demo01 /memrun nginx /bin/date
 ```
 
 ```
-docker run -it --rm krol/demo-memrun /memrun nginx /bin/date
+docker run -it --rm krol/demo-memfd:v1 /demo-memfd nginx /bin/date
 ```
+
+<details>
+<summary>Show results</summary>
+
+```
+docker run -it --rm krol/demo-memfd:v1 /demo-memfd nginx /bin/date
+Usage: process_name elf_binary_path
+---> Create the memory file descriptor:  4
+---> Reading ELF file path:  /bin/date
+---> Writing ELF file in the memory file descriptor:  4
+---> execve, executes the program pointed to /proc/self/fd/4 using the currently running process: nginx
+Thu Oct 13 00:25:28 UTC 2022
+````
+</details></br>
+
 ### Using Kubernetes
 
 ```
