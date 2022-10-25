@@ -1,3 +1,2 @@
-FROM nginx:1.21
-COPY memrun /
-COPY demo.sh /
+FROM nginx:1.23 
+COPY bin/demo-memfd
